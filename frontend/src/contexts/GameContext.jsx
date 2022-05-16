@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 
 const GameContext = createContext();
 
@@ -6,6 +6,7 @@ function GameProvider({ children }) {
   const [data, setData] = useState([
     {
       letter: "A",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -14,6 +15,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "Z",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -22,6 +24,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "E",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -30,6 +33,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "R",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -38,6 +42,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "T",
+      name: "Tree",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -46,6 +51,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "Y",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -54,6 +60,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "U",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -62,6 +69,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "I",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -70,6 +78,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "O",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -78,6 +87,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "P",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -86,6 +96,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "Q",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -94,6 +105,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "S",
+      name: "Stone",
       emoji: "\uD83E\uDEA8",
       prodSpeed: 1,
       value: 0,
@@ -102,6 +114,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "D",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -110,6 +123,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "F",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -118,6 +132,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "G",
+      name: "Grass",
       emoji: "\uD83C\uDF3F",
       prodSpeed: 2,
       value: 0,
@@ -126,6 +141,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "H",
+      name: "House",
       emoji: "\uD83D\uDED6",
       prodSpeed: 1,
       value: 0,
@@ -134,6 +150,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "J",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -142,6 +159,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "K",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -150,6 +168,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "L",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -158,6 +177,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "M",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -166,6 +186,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "W",
+      name: "Water",
       emoji: "\uD83D\uDCA7",
       prodSpeed: 1,
       value: 0,
@@ -174,6 +195,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "X",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -182,6 +204,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "C",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -190,6 +213,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "V",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -198,6 +222,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "B",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -206,6 +231,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "N",
+      name: "null",
       emoji: "\uD83E\uDEB5",
       prodSpeed: 1,
       value: 0,
@@ -213,22 +239,9 @@ function GameProvider({ children }) {
       available: false,
     },
   ]);
-
-  useEffect(() => {
-    setInterval(() => {
-      data.forEach((e) => {
-        if (e.active) {
-          e.value += e.prodSpeed;
-          if (data[20].value >= 10) {
-            data[15].available += true;
-          }
-        }
-      });
-    }, 1000);
-  }, []);
-
+  const [unlock, setUnlock] = useState(0);
   return (
-    <GameContext.Provider value={{ data, setData }}>
+    <GameContext.Provider value={{ data, setData, unlock, setUnlock }}>
       {children}
     </GameContext.Provider>
   );
