@@ -1,36 +1,35 @@
-import Counter from "@components/Counter";
-import logo from "@assets/logo.svg";
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-export default function Home() {
+function Home() {
   return (
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>Hello Vite + React !</p>
-
-      <Counter />
-
-      <p>
-        Edit <code>App.jsx</code> and save to test HMR updates.
-      </p>
-      <p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        {" | "}
-        <a
-          className="App-link"
-          href="https://vitejs.dev/guide/features.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Vite Docs
-        </a>
-      </p>
-    </header>
+    <div className="h-screen">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="video-title">
+          <video id="background-video" autoPlay loop muted>
+            <source src="/src/assets/nirvana4.mp4" type="video/mp4" />
+          </video>
+          <div className="text-box">
+            <h1>REACH NIRVANA</h1>
+            <Link to="/game/">
+              <button
+                type="button"
+                className="border py-2 px-8 rounded-lg hover:bg-gray-600 translate-x-2"
+              >
+                PLAY
+              </button>
+            </Link>
+          </div>
+        </div>
+      </motion.div>
+    </div>
   );
 }
+
+export default Home;
