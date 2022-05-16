@@ -13,13 +13,13 @@ export default function Game() {
   const [discoveryModal, setDiscoveryModal] = useState(false);
 
   function handleChange(letter) {
-    const newKeys = [...data];
-    const index = newKeys.indexOf(letter);
-    newKeys[index].active = newKeys[index].available
-      ? !newKeys[index].active
-      : newKeys[index].active;
-    setData(newKeys);
+    const index = data.indexOf(letter);
+    data[index].active = data[index].available
+      ? !data[index].active
+      : data[index].active;
+    setData(data);
   }
+
   function handleKeyPress(event) {
     if (!/[a-zA-Z]|\./.test(event.key)) {
       event.preventDefault();
