@@ -55,7 +55,7 @@ function GameProvider({ children }) {
       available: false,
       consumptions: [
         { id: 20, amount: 0.5 },
-        { id: 12, amount: 0.5 },
+        { id: 12, amount: 1 },
         { id: 11, amount: 1 },
       ],
     },
@@ -108,6 +108,10 @@ function GameProvider({ children }) {
       value: 0,
       active: false,
       available: false,
+      consumptions: [
+        { id: 4, amount: 0.5 },
+        { id: 20, amount: 0.5 },
+      ],
     },
     {
       letter: "Q",
@@ -133,7 +137,7 @@ function GameProvider({ children }) {
       letter: "D",
       name: "Dirt",
       emoji: "\u26F0\uFE0F",
-      prodSpeed: 1,
+      prodSpeed: 2,
       totalProdSpeed: 0,
       value: 0,
       active: false,
@@ -151,7 +155,7 @@ function GameProvider({ children }) {
     },
     {
       letter: "G",
-      name: "Grass",
+      name: "Gold",
       emoji: "\uD83C\uDF3F",
       prodSpeed: 2,
       totalProdSpeed: 0,
@@ -163,11 +167,12 @@ function GameProvider({ children }) {
       letter: "H",
       name: "House",
       emoji: "\uD83D\uDED6",
-      prodSpeed: 1,
+      prodSpeed: 0.1,
       totalProdSpeed: 0,
       value: 0,
       active: false,
       available: false,
+      consumptions: [{ id: 4, amount: 0.5 }],
     },
     {
       letter: "J",
@@ -243,16 +248,17 @@ function GameProvider({ children }) {
       letter: "V",
       name: "Villager",
       emoji: "\uD83D\uDC64",
-      prodSpeed: 1,
+      prodSpeed: 0.1,
       totalProdSpeed: 0,
       value: 0,
       active: false,
       available: false,
+      passivs: [{ id: 0, amount: 1 }],
     },
     {
       letter: "B",
       name: "Book",
-      emoji: "\uD83D\uDCD3",
+      emoji: "\uD83D\uDCD6",
       prodSpeed: 1,
       totalProdSpeed: 0,
       value: 0,
@@ -271,8 +277,12 @@ function GameProvider({ children }) {
     },
   ]);
   const [unlock, setUnlock] = useState(0);
+  const [popup, setPopup] = useState(false);
+
   return (
-    <GameContext.Provider value={{ data, setData, unlock, setUnlock }}>
+    <GameContext.Provider
+      value={{ data, setData, unlock, setUnlock, popup, setPopup }}
+    >
       {children}
     </GameContext.Provider>
   );

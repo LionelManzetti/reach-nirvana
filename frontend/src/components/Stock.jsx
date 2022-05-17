@@ -3,7 +3,7 @@ import React from "react";
 function Stock({ letter }) {
   return (
     <p className="text-xl text-white">
-      {letter.emoji} = {letter.value}
+      {letter.emoji} = {Math.round(letter.value * 10) / 10}
     </p>
   );
 }

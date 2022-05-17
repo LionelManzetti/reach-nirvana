@@ -2,7 +2,7 @@ import React from "react";
 
 function Ressource({ emoji, speed }) {
   return (
-    <h1 className="text-3xl mx-3">
+    <h1 className="text-xl mx-3 font-semibold text-gray-600">
       {emoji}
       {speed}/sec
     </h1>

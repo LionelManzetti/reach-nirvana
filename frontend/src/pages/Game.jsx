@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import Ressources from "../components/Ressources";
@@ -9,8 +9,11 @@ import Discovery from "../components/Discovery";
 import ExportContext from "../contexts/GameContext";
 
 export default function Game() {
-  const { data, setData } = useContext(ExportContext.GameContext);
+  const { data, setData, setUnlock, popup, setPopup } = useContext(
+    ExportContext.GameContext
+  );
   const [discoveryModal, setDiscoveryModal] = useState(false);
+  const [transition, setTransition] = useState("opacity-0");
 
   function handleChange(letter) {
     const index = data.indexOf(letter);
@@ -18,6 +21,7 @@ export default function Game() {
       ? !data[index].active
       : data[index].active;
     setData(data);
+    setUnlock(Math.random());
   }
 
   function handleKeyPress(event) {
@@ -27,6 +31,15 @@ export default function Game() {
       handleChange(data.find((e) => event.key.toUpperCase() === e.letter));
     }
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTransition("opacity-100");
+    }, 500);
+    setTimeout(() => {
+      setTransition("opacity-0");
+    }, 3000);
+  }, [popup]);
 
   window.onkeydown = (event) => handleKeyPress(event);
 
@@ -38,7 +51,7 @@ export default function Game() {
       transition={{ duration: 0.5 }}
     >
       <div className="flex flex-col items-center h-screen">
-        <h1 className="text-5xl font-bold m-28 font-sans tracking-wide text-transparent bg-gradient-to-r from-cyan-500 to-white bg-clip-text">
+        <h1 className="text-6xl select-none font-bold m-28 font-sans tracking-wide text-transparent bg-gradient-to-r from-cyan-500 to-white bg-clip-text">
           REACH NIRVANA
         </h1>
         <div
@@ -56,16 +69,23 @@ export default function Game() {
         <div
           className={`${
             discoveryModal ? "visible" : "hidden"
-          } absolute w-screen h-screen bg-slate-100/80`}
+          } absolute w-screen h-screen p-20`}
           onClick={() => setDiscoveryModal(!discoveryModal)}
         >
           <Discovery />
         </div>
-        <div className="flex flex-col absolute inset-y-1/3 left-10">
+        <div className="flex flex-col absolute inset-y-1/3 left-10 text-left">
           <Production />
         </div>
         <Keyboard data={data} handleChange={handleChange} />
         <Ressources type={data.filter((e) => e.active)} />
+        {popup && (
+          <p
+            className={`${transition} absolute transition duration-300 text-gray-200 text-xl leading-normal text-center left-10 top-32`}
+          >
+            {popup.emoji} {popup.name} discovered !
+          </p>
+        )}
       </div>
     </motion.div>
   );

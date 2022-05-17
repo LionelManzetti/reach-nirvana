@@ -3,7 +3,7 @@ import ExportContext from "../contexts/GameContext";
 import Stock from "./Stock";
 
 const Production = () => {
-  const { data, setUnlock } = useContext(ExportContext.GameContext);
+  const { data, setUnlock, setPopup } = useContext(ExportContext.GameContext);
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -26,8 +26,11 @@ const Production = () => {
           }
           if (e.active) e.value += e.prodSpeed;
         }
+        passivConsumation(e);
       });
+
       updateTotalProdSpeed();
+
       setCount(count + 1);
     }, 1000);
   }, [count]);
@@ -46,27 +49,67 @@ const Production = () => {
         );
       }
     });
+    data.forEach((e) => {
+      if (e.active && e.passivs) {
+        e.passivs.forEach(
+          (consumption) =>
+            (data[consumption.id].totalProdSpeed -= consumption.amount)
+        );
+      }
+    });
+    setUnlock(count);
   };
-  // 10 woods are unlocking houses
+
   /**
    * @params require = resource id needed
    * @params toUnlock = resource id to unlock
    */
   const unlock = (require, toUnlock, amount) => {
-    if (data[require].value >= amount) {
-      data[toUnlock].available = true;
-      setUnlock(count);
+    if (data[toUnlock].available != true) {
+      if (data[require].value >= amount) {
+        data[toUnlock].available = true;
+        setPopup(data[toUnlock]);
+      }
     }
   };
-  unlock(20, 12, 5);
-  unlock(12, 4, 5);
-  unlock(12, 11, 5);
+  // Water unlocks Dirt
+  unlock(20, 12, 4);
+  // Dirt unlocks Seed
+  unlock(12, 11, 9);
+  // Seed unlocks Tree
+  unlock(11, 4, 1);
+  // Tree unlocks Apple
+  unlock(4, 0, 4);
+  //Tree unlocks House
+  unlock(4, 15, 9);
+  //Tree unlocks Paper
+  unlock(4, 9, 19);
+  //House unlocks Villagers
+  unlock(15, 23, 1);
+  //Villagers unlocks ...
+
+  const passivConsumation = (resource) => {
+    if (resource.passivs && resource.value >= 1) {
+      if (
+        resource.passivs.every(
+          (consumption) => data[consumption.id].value >= consumption.amount
+        )
+      ) {
+        resource.passivs.forEach((consumption) => {
+          Math.max((data[consumption.id].value -= consumption.amount), 0);
+        });
+      } else {
+        Math.max((resource.value -= 1), 0);
+        resource.active = false;
+      }
+    }
+  };
   return (
     <>
       {data
         .filter((e) => e.value > 0)
         .map((e) => (
-          <Stock letter={e} />
+          <Stock key={e.letter} letter={e} />
         ))}
     </>
   );

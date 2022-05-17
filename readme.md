@@ -1,4 +1,4 @@
-water => grass
+water => Dirt
 Dirt + water => seed && tree
 Seed
 Tree => Apple && House
