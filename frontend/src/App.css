@@ -175,3 +175,8 @@ button:active {
   color: #cfbff7;
   text-shadow: 0px 0px 20px #cfbff7, 0px 0px 35px #cfbff7;
 }
+
+.title-shadow {
+  color: #ffd900;
+  text-shadow: 0px 0px 4px #ffd900;
+}

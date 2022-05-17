@@ -51,8 +51,15 @@ export default function Game() {
       transition={{ duration: 0.5 }}
     >
       <div className="flex flex-col items-center h-screen">
-        <h1 className="text-6xl select-none font-bold m-28 font-sans tracking-wide text-transparent bg-gradient-to-r from-cyan-500 to-white bg-clip-text">
-          REACH NIRVANA
+        <h1 className="text-6xl flex flex-row select-none font-bold m-28 font-sans tracking-wide text-transparent bg-gradient-to-r from-cyan-500 to-white bg-clip-text">
+          REACH &nbsp;
+          <p className={data[25].active && "title-shadow"}> N</p>
+          <p className={data[7].active && "title-shadow"}>I</p>
+          <p className={data[3].active && "title-shadow"}>R</p>
+          <p className={data[23].active && "title-shadow"}>V</p>
+          <p className={data[0].active && "title-shadow"}>A</p>
+          <p className={data[25].active && "title-shadow"}>N</p>
+          <p className={data[0].active && "title-shadow"}>A</p>
         </h1>
         <div
           className={`${
